@@ -1,0 +1,32 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install updates
+    yum:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+
+- hosts: web_servers
+  become: true
+  tasks:
+
+  - name: install apache2 package and update repository index
+    package:
+      name: httpd
+      state: latest
+
+    
+- hosts : db_servers
+  become: true
+  tasks: 
+ 
+  - name: install mariadb
+    yum:
+      name: mariadb
+      state: latest
+    when: ansible_distribution == "CentOS"
