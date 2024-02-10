@@ -5,6 +5,7 @@
   tasks:
 
   - name: install updates
+    tags: always
     yum:
       update_only: yes
       update_cache: yes
@@ -16,6 +17,7 @@
   tasks:
 
   - name: install apache2 package and update repository index
+    tags: cpache,centos,httpd,working
     package:
       name: httpd
       state: latest
@@ -26,6 +28,7 @@
   tasks: 
  
   - name: install mariadb
+    tags: centos,db,mariadb
     yum:
       name: mariadb
       state: latest
