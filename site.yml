@@ -7,10 +7,20 @@
   - name: install updates
     tags: always
     yum:
-      update_only: yes
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "CentOS"
 
+
+- hosts: all
+  become: true
+  tasks:
+  
+  - name: add ssh kew for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGfbU3nkz1fV270kOab7K695rVUNhB6nsLThUMs0ZAMa ansible"
 
 - hosts: workstations
   become: true
@@ -43,6 +53,15 @@
         - httpd
         - php
       state: latest
+
+  - name: start httpd (CentOS)
+    tags: apache,centos,httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes      
+    when: ansible_distribution == "CentOS"
+
 
 
   - name: copy default html file for site
