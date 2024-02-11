@@ -1,0 +1,27 @@
+- name: install apache2 package and update repository index
+  tags: apache,centos,httpd,working
+  package:
+    name:
+      - httpd
+      - php
+    state: latest
+
+- name: start httpd (CentOS)
+  tags: apache,centos,httpd
+  service:
+    name: httpd
+    state: started
+    enabled: yes      
+  when: ansible_distribution == "CentOS"
+
+
+
+- name: copy default html file for site
+  tags: apache,apache,httpd
+  copy: 
+    src: default_site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
+    

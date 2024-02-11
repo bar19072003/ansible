@@ -1,0 +1,6 @@
+- name: install mariadb
+  tags: centos,db,mariadb
+  yum:
+    name: mariadb
+    state: latest
+  when: ansible_distribution == "CentOS"
