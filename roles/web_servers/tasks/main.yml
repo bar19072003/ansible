@@ -2,14 +2,14 @@
   tags: apache,centos,httpd,working
   package:
     name:
-      - httpd
-      - php
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
     state: latest
 
 - name: start httpd (CentOS)
   tags: apache,centos,httpd
   service:
-    name: httpd
+    name: "{{ apache_service }}"
     state: started
     enabled: yes      
   when: ansible_distribution == "CentOS"
