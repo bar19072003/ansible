@@ -1,0 +1,36 @@
+---
+- name: Create physical volume (PV) on the partition
+  command: pvcreate "{{ partition_device }}1"
+
+- name: Create volume group (VG)
+  command: vgcreate "{{ vg_name }}" "{{ partition_device }}1"
+
+- name: Create logical volume (LV)
+  lvol:
+    vg: "{{ vg_name }}"
+    lv: "{{ lv_name }}"
+    size: "{{ lv_size }}"
+
+- name: Create filesystem on the logical volume
+  filesystem:
+    fstype: "{{ fs_type }}"
+    dev: "/dev/{{ vg_name }}/{{ lv_name }}"
+
+- name: Create mount point with 777 permissions
+  file:
+    path: "{{ mount_point }}"
+    state: directory
+    mode: '0777'
+
+- name: Add mount point to /etc/fstab
+  lineinfile:
+    path: /etc/fstab
+    line: "/dev/mapper/{{ vg_name }}-{{ lv_name }} {{ mount_point }} {{ fs_type }} defaults 0 0"
+
+- name: Mount the filesystem
+  mount:
+    path: "{{ mount_point }}"
+    src: "/dev/{{ vg_name }}/{{ lv_name }}"
+    fstype: "{{ fs_type }}"
+    state: mounted
+

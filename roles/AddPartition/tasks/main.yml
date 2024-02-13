@@ -1,0 +1,16 @@
+---
+
+- name: Install parted
+  package:
+    name: parted
+    state: present
+
+- name: Create partition on /dev/sdb
+  parted:
+    device: "{{ partition_device }}"
+    state: present
+    number: 1
+    part_start: 0%
+    flags:
+      - lvm
+
