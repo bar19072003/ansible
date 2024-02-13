@@ -1,0 +1,16 @@
+- name: Configure Partition and File System
+  hosts: hafifa
+  become: yes
+  roles:
+    - role: AddPartition
+      vars:
+        partition_device: /dev/sdb
+
+    - role: bb
+      vars:
+        vg_name: my_volume_group
+        lv_name: my_logical_volume
+        lv_size: 5G
+        fs_type: ext4
+        mount_point: /mnt/my_mount_point
+
