@@ -6,7 +6,7 @@
       vars:
         partition_device: /dev/sdb
 
-    - role: bb
+    - role: AddFS
       vars:
         vg_name: my_volume_group
         lv_name: my_logical_volume
