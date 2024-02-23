@@ -1,0 +1,7 @@
+---
+
+- name: install splunk enterprise
+  hosts: indexers
+  become: yes
+  roles:
+    - role: indexers

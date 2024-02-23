@@ -1,0 +1,35 @@
+---
+    - name: Download splunk universal forwarder
+      get_url:
+        url: "https://download.splunk.com/products/universalforwarder/releases/9.2.0.1/linux/splunkforwarder-9.2.0.1-d8ae995bf219.x86_64.rpm"		
+        dest: "/opt/splunkforwarder.rpm"
+
+    - name: Install tar on CentOS server
+      ansible.builtin.package:
+        name: tar
+        state: present 
+
+    - name: Install splunk universal forwader
+      yum:
+        name: "/opt/splunkforwarder.rpm" 
+        state: present
+
+    - name: Create a splunk group
+      group:
+        name: splunk
+        state: present
+
+    - name: create a splunk user
+      user:
+        name: splunk
+        group: splunk
+        home: "/opt/splunkforwarder"
+        system: yes
+        state: present
+
+    - name: Set permissions to splunk user and group
+      file:
+        path: "/opt/splunkforwarder"
+        owner: splunk
+        group: splunk
+        recurse: yes

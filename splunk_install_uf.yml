@@ -1,0 +1,7 @@
+---
+
+- name: install splunk universal forwarder
+  hosts: universal_forwarders
+  become: yes
+  roles:
+    - role: universal_forwarders
