@@ -33,3 +33,27 @@
         owner: splunk
         group: splunk
         recurse: yes
+
+    - name: generate splunk_config launch file from template
+      template:
+        src: "launch_conf.j2"
+        dest: /opt/splunk/etc/splunk-launch.conf	
+ 
+    - name: generate splunk_config web file from template
+      template:
+        src: "web_conf.j2"
+        dest: /opt/splunk/etc/system/default/web.conf
+
+    - name: start splunk and accept license
+      ansible.builtin.expect:
+        command: "/opt/splunk/bin/splunk start --accept-license"
+        responses:
+          "Please enter an administrator username:":
+             - "bar"
+          "Please enter a new password:":
+             - "19072003"
+          "Please confirm new password:":
+             - "19072003"
+
+    - name: restart splunk
+      command: "/opt/splunk/bin/splunk restart"
