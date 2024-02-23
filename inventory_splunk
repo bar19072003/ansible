@@ -6,3 +6,10 @@ uf2 ansible_host=10.0.0.53
 ind1 ansible_host=10.0.0.54
 ind2 ansible_host=10.0.0.55
 
+[search_heads]
+sh1 ansible_host=10.0.0.64
+sh2 ansible_host=10.0.0.59
+sh3 ansible_host=10.0.0.58
+
+[deployer]
+dpl ansible_host=10.0.0.60

@@ -44,16 +44,26 @@
         src: "web_conf.j2"
         dest: /opt/splunk/etc/system/default/web.conf
 
-    - name: start splunk and accept license
-      ansible.builtin.expect:
-        command: "/opt/splunk/bin/splunk start --accept-license"
-        responses:
-          "Please enter an administrator username:":
-             - "bar"
-          "Please enter a new password:":
-             - "19072003"
-          "Please confirm new password:":
-             - "19072003"
+
+    - name: open firewall ports
+      firewalld:
+        port: "{{ item }}/tcp"
+        permanent: yes
+        state: enabled
+      with_items:
+        - 8000
+        - 8080
+        - 8088
+        - 8089
+        - 8191
+        - 9997
+
+    - name: restart firewalld
+      systemd:
+        name: firewalld
+        state: restarted
+        
+
 
     - name: restart splunk
       command: "/opt/splunk/bin/splunk restart"

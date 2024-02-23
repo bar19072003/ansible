@@ -1,0 +1,7 @@
+---
+
+- name: install splunk enterprise
+  hosts: search_heads
+  become: yes
+  roles:
+    - role: search_heads

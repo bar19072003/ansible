@@ -4,10 +4,6 @@
         url: "https://download.splunk.com/products/universalforwarder/releases/9.2.0.1/linux/splunkforwarder-9.2.0.1-d8ae995bf219.x86_64.rpm"		
         dest: "/opt/splunkforwarder.rpm"
 
-    - name: Install tar on CentOS server
-      ansible.builtin.package:
-        name: tar
-        state: present 
 
     - name: Install splunk universal forwader
       yum:
@@ -34,78 +30,4 @@
         group: splunk
         recurse: yes
 
-    - name: Download splunk enterprise
-      get_url:
-        url: "https://download.splunk.com/products/splunk/releases/9.2.0.1/linux/splunk-9.2.0.1-d8ae995bf219.x86_64.rpm"		
-        dest: "/opt/splunk.rpm"
 
-    - name: Install tar on CentOS server
-      ansible.builtin.package:
-        name: tar
-        state: present 
-
-    - name: Install splunk enterprise
-      yum:
-        name: "/opt/splunk.rpm" 
-        state: present
-
-    - name: Create a splunk group
-      group:
-        name: splunk
-        state: present
-
-    - name: create a splunk user
-      user:
-        name: splunk
-        group: splunk
-        home: "/opt/splunk"
-        system: yes
-        state: present
-
-    - name: Set permissions to splunk user and group
-      file:
-        path: "/opt/splunk"
-        owner: splunk
-        group: splunk
-        recurse: yes
-
-    - name: generate splunk_config launch file from template
-      template:
-        src: "launch_conf.j2"
-        dest: /opt/splunkforwarder/etc/splunk-launch.conf	
- 
-    - name: generate splunk_config web file from template
-      template:
-        src: "web_conf.j2"
-        dest: /opt/splunkforwarder/etc/system/default/web.conf
-
-    - name: start splunk and accept license
-      ansible.builtin.expect:
-        command: "/opt/splunkforwarder/bin/splunk start --accept-license"
-        responses:
-          "Please enter an administrator username:":
-             - "bar"
-          "Please enter a new password:":
-             - "19072003"
-          "Please confirm new password:":
-             - "19072003"
-
-    - name: open tcp/udp port 8000
-      firewalld:
-        port:8000
-        protocol: "{{ item }}"
-        state: enabled
-        immediate: yes
-        pemanent: yes
-      with_items:
-        - tcp
-        - udp
-
-     - name: reload firewalld
-       systemd:
-         name: firewalld
-         state: restarted      
-
-
-    - name: restart splunk
-      command: "/opt/splunk/bin/splunk restart"
