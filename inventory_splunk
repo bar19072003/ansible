@@ -9,7 +9,10 @@ ind2 ansible_host=10.0.0.55
 [search_heads]
 sh1 ansible_host=10.0.0.64
 sh2 ansible_host=10.0.0.59
-sh3 ansible_host=10.0.0.58
+sh3 ansible_host=10.0.0.56
 
 [deployer]
 dpl ansible_host=10.0.0.60
+
+[deployment_server]
+dps ansible_host=10.0.0.46

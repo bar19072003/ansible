@@ -1,0 +1,7 @@
+---
+
+- name: install splunk enterprise
+  hosts: deployment_server
+  become: yes
+  roles:
+    - role: deployment_server
