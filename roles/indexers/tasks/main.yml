@@ -24,6 +24,7 @@
         name: splunk
         group: splunk
         home: "/opt/splunk"
+        password: "{{ '19072003' | password_hash('sha512') }}"
         system: yes
         state: present
 
@@ -44,6 +45,10 @@
         src: "web_conf.j2"
         dest: /opt/splunk/etc/system/default/web.conf
 
+    - name: set SPLUNK_HOME variable
+      template:
+        src: "bash_template"
+        dest: /opt/splunk/.bashrc
 
     - name: open firewall ports
       firewalld:
@@ -63,7 +68,6 @@
         name: firewalld
         state: restarted
         
-
 
     - name: restart splunk
       command: "/opt/splunk/bin/splunk restart"

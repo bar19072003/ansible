@@ -20,8 +20,10 @@
         name: splunk
         group: splunk
         home: "/opt/splunkforwarder"
+        password: "{{ '19072003' | password_hash('sha512') }}"
         system: yes
         state: present
+
 
     - name: Set permissions to splunk user and group
       file:
@@ -30,4 +32,11 @@
         group: splunk
         recurse: yes
 
+    - name: set SPLUNK_HOME variable
+      template:
+        src: "bash_template"
+        dest: /opt/splunkforwarder/.bashrc
 
+
+    - name: restart splunk forwarder
+      command: "/opt/splunkforwarder/bin/splunk restart"
