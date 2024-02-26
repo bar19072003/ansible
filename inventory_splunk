@@ -15,4 +15,4 @@ sh3 ansible_host=10.0.0.56
 dpl ansible_host=10.0.0.60
 
 [deployment_server]
-dps ansible_host=10.0.0.46
+dps ansible_host=10.0.0.61
