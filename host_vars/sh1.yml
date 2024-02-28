@@ -1,1 +1,2 @@
-ip_addr: 10.0.0.64
+ip_addr: 10.0.0.52
+rep_port: 9000
