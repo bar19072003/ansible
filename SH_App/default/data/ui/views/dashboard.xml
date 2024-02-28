@@ -1,0 +1,51 @@
+<dashboard>
+  <label>Monitoring Overview</label>
+
+
+  <!-- Certificate Expiration Panel -->
+  <row>
+    <panel>
+      <chart>
+        <search>
+          <query>| index=main sourcetype=ssl_certification_expiry</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+      </chart>
+    </panel>
+  </row> 
+
+
+  <!-- Server Version Panel -->
+  <row>
+    <panel>
+      <chart>
+        <search>
+          <query>| index=main sourcetype=server_version</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+      </chart>
+    </panel>
+  </row>
+
+  
+  <!-- Packages Panel -->
+  <row>
+    <panel>
+      <chart>
+        <search>
+          <query>| index=main sourcetype=packages_version</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <option name="charting.chart.nullValueMode">gasp</option>
+      </chart>
+    </panel>
+  </row>
+</dashboard>
