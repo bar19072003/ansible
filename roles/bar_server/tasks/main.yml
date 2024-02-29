@@ -1,0 +1,2 @@
+- name: remove my.txt file 
+  shell: ls -la

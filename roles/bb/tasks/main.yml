@@ -1,0 +1,7 @@
+- name: Mount the filesystem
+  mount:
+    path: "{{ mount_point }}"
+    src: "/dev/{{ vg_name }}/{{ lv_name }}"
+    fstype: "{{ fs_type }}"
+    state: mounted
+

@@ -1,2 +1,3 @@
 ip_addr: 10.0.0.51
 rep_port: 9100
+server_name: search_head_2

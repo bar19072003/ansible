@@ -45,6 +45,11 @@
         src: "web_conf.j2"
         dest: /opt/splunk/etc/system/default/web.conf
 
+    - name: generate splunk_config server file from template
+      template:
+        src: "server_conf.j2"
+        dest: /opt/splunk/etc/system/local/server.conf
+
     - name: set SPLUNK_HOME variable
       template:
         src: "bash_template"
