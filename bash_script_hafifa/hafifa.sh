@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+# this script will run when a user logs in, the user won'tbe able to use the system, only choose from the following options, each choice will be written to a log file 
+
+# generate log file 
 log_file=/var/log/choice.log
 
 log_choice() {
