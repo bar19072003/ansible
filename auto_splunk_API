@@ -1,10 +1,13 @@
 #!/bin/bash
 
+# create the forwarder application using splunk API
+
+
 # Splunk deployment server and authentication information
 DEPLOYMENT_SERVER="https://10.0.0.61:8089"
 USERNAME="splunk"
 PASSWORD="19072003"
-APP_NAME="bibiAPP"
+APP_NAME="forwarder_APP"
 
 # Authentication and get session key
 auth_response=$(curl -k -s -d "username=bar&password=19072003" "$DEPLOYMENT_SERVER/services/auth/login")
