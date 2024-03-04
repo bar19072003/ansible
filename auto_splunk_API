@@ -23,7 +23,7 @@ script_path2="/home/bar/ansible/ssl_certificate_monitor/bin/get_server_version.s
 script2_upload_response=$(curl -k -s -X POST -d "name=get_server_version.sh&file=$script_path2" -H Authorization: Splunk $session_key "$DEPLOYMENT_SERVER/services/apps/local/$APP_NAME/data/inputs/script/get_server_version.sh")
 
 script_path3="/home/bar/ansible/ssl_certificate_monitor/bin/get_packages.sh"
-script3_upload_response=$(curl -k -s -X POST -d "name=get_packages.sh&file=$script_path3" -H Authorization: Splunk $session_key "$DEPLOYMENT_SERVER/services/apps/local/$APP_NAME/data/inputs/script/get_packages.sh)
+script3_upload_response=$(curl -k -s -X POST -d "name=get_packages.sh&file=$script_path3" -H Authorization: Splunk $session_key "$DEPLOYMENT_SERVER/services/apps/local/$APP_NAME/data/inputs/script/get_packages.sh")
 
 # Configure inputs
 inputs_config="[script:///opt/splunkforwarder/etc/apps/ssl_certificate_monitor/bin/get_cert_expiry.sh]
