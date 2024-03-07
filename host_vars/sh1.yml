@@ -1,3 +1,4 @@
 ip_addr: 10.0.0.52
 rep_port: 9000
 server_name: search_head_1
+role: searchhead
